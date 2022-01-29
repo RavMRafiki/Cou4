@@ -1,0 +1,21 @@
+﻿  main.cpp
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(15,15): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(121,31): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(210,67): warning C4244: "+=": konwersja z "float" do "int", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(242,41): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(260,41): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(285,67): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(285,52): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+          with
+          [
+              T=float
+          ]
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(327,46): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(327,33): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(328,42): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\rafal\source\repos\Cou\Project1\main.cpp(328,27): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+  Project1.vcxproj -> C:\Users\rafal\source\repos\Cou\x64\Debug\Project1.exe
