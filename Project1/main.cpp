@@ -16,8 +16,7 @@ int main()
 
     RenderWindow window(VideoMode(1280,720), "Cou");
 
-   /* SoundBuffer a1, a2;
-    a1.loadFromFile(audio/Moo.wav)*/
+    //wczytywanie tekstur
     Texture t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11;
     t1.loadFromFile("images/cou.png");
     t2.loadFromFile("images/background.png");
@@ -32,7 +31,7 @@ int main()
     t11.loadFromFile("images/apple.png");
 
 
-
+    //zarzƒÖdanie tymi teksturami
     Sprite cou(t1), background(t2), ikony(t3), ikonamleko(t3), ikonaspanko(t3), ikonajedzenie(t3), ikonapicie(t3), tophud(t4),coin(t5),backgroundSpanko(t6),sheep(t7),backgroundPicie(t8),waterbucket(t9),coujedzenie(t1),backgroundJedzenie(t10),apple(t11);
     cou.setScale(sf::Vector2f(0.35f, 0.35f));
     cou.setPosition(sf::Vector2f(380.f, 120.f));
@@ -55,6 +54,7 @@ int main()
     backgroundJedzenie.setScale(sf::Vector2f(5.f, 5.f));
     apple.setScale(sf::Vector2f(0.05f, 0.05f));
     apple.setPosition(sf::Vector2f(700.f, 400.f));
+    //zmienne
     int dx=0,dy=0; bool rotate=0; int colorNum=1;
     float timer = 0.f, delay = 0.3f;
     int money = 27;
@@ -66,15 +66,16 @@ int main()
     int tabSpankoX[9]{};
     int tabSpankoY[9]{};
     int spankoLiczbaCou{};
-    float zape≥nienieMleka = 0.f;
-    float zape≥nienieSpanka = 10.f;
-    float zape≥nienieJedzenia = 10.f;
-    float zape≥nieniePicia = 10.f;
-    float wysokoúÊBucketa = 0.f;
+    float zapeËªüienieMleka = 0.f;
+    float zapeËªüienieSpanka = 10.f;
+    float zapeËªüienieJedzenia = 10.f;
+    float zapeËªüieniePicia = 10.f;
+    float wysokoÓ∞´Bucketa = 0.f;
     int pozycjaCouX = 640, pozycjaCouY = 360, pozycjaAppleX=700,pozycjaAppleY=400;
     int level = 1;
-    float mnoønik1 = 1, mnoønik2=1;
-
+    float mnoÁ©çik1 = 1, mnoÁ©çik2=1;
+    
+    //wczytanie zapisu gry
     std::string linijka;
     std::fstream plik;
     plik.open("save/save.txt", std::ios::in); 
@@ -87,59 +88,60 @@ int main()
             level = std::stoi(linijka);
         }
         if (std::getline(plik, linijka)) {
-            zape≥nienieMleka = std::stof(linijka);
+            zapeËªüienieMleka = std::stof(linijka);
         }
         if (std::getline(plik, linijka)) {
-            zape≥nienieSpanka = std::stof(linijka);
+            zapeËªüienieSpanka = std::stof(linijka);
         }
         if (std::getline(plik, linijka)) {
-            zape≥nienieJedzenia = std::stof(linijka);
+            zapeËªüienieJedzenia = std::stof(linijka);
         }
         if (std::getline(plik, linijka)) {
-            zape≥nieniePicia = std::stof(linijka);
+            zapeËªüieniePicia = std::stof(linijka);
         }
     }
     else std::cout << "Nie wczytano save'a" << std::endl;
     plik.close();
 
     if (level == 2) {
-        mnoønik1 = 1.5f;
-        mnoønik2 = 3.f;
+        mnoÁ©çik1 = 1.5f;
+        mnoÁ©çik2 = 3.f;
         t1.loadFromFile("images/cou2.png");
     }
     else if (level == 3) {
-        mnoønik1 = 2.1f;
-        mnoønik2 = 9.f;
+        mnoÁ©çik1 = 2.1f;
+        mnoÁ©çik2 = 9.f;
         t1.loadFromFile("images/cou3.png");
     }
     else if (level ==4) {
-        mnoønik1 = 3.f;
-        mnoønik2 = 81.f;
+        mnoÁ©çik1 = 3.f;
+        mnoÁ©çik2 = 81.f;
         t1.loadFromFile("images/cou4.png");
     }
     else if (level > 4) {
-        mnoønik1 = mnoønik1 * pow(1.03f,level-4);
+        mnoÁ©çik1 = mnoÁ©çik1 * pow(1.03f,level-4);
         t1.loadFromFile("images/cou4.png");
-        if (mnoønik1 > 4.3) { mnoønik1 = 5; }
-        mnoønik2 = 81.f;
+        if (mnoÁ©çik1 > 4.3) { mnoÁ©çik1 = 5; }
+        mnoÁ©çik2 = 81.f;
     }
-
-    RectangleShape mlekot≥o, spankot≥o, jedzeniet≥o, piciet≥o;
-    mlekot≥o.setSize(Vector2f(100.f, 100.f));
-    mlekot≥o.setFillColor(Color{222, 222, 222});
-    mlekot≥o.setPosition(sf::Vector2f(425.f, 20.f));
-    spankot≥o.setSize(Vector2f(100.f, 100.f));
-    spankot≥o.setFillColor(Color{ 255, 246, 224 });
-    spankot≥o.setPosition(sf::Vector2f(665.f, 20.f));
-    jedzeniet≥o.setSize(Vector2f(100.f, 100.f));
-    jedzeniet≥o.setFillColor(Color{ 224, 255, 226 });
-    jedzeniet≥o.setPosition(sf::Vector2f(545.f, 20.f));
-    piciet≥o.setSize(Vector2f(100.f, 100.f));
-    piciet≥o.setFillColor(Color{ 224, 233, 255 });
-    piciet≥o.setPosition(sf::Vector2f(785.f, 20.f));
+    
+    //stworzenie wype≈Çnienia zasob√≥w prostokƒÖtami
+    RectangleShape mlekotÈÄô, spankotÈÄô, jedzenietÈÄô, picietÈÄô;
+    mlekotÈÄô.setSize(Vector2f(100.f, 100.f));
+    mlekotÈÄô.setFillColor(Color{222, 222, 222});
+    mlekotÈÄô.setPosition(sf::Vector2f(425.f, 20.f));
+    spankotÈÄô.setSize(Vector2f(100.f, 100.f));
+    spankotÈÄô.setFillColor(Color{ 255, 246, 224 });
+    spankotÈÄô.setPosition(sf::Vector2f(665.f, 20.f));
+    jedzenietÈÄô.setSize(Vector2f(100.f, 100.f));
+    jedzenietÈÄô.setFillColor(Color{ 224, 255, 226 });
+    jedzenietÈÄô.setPosition(sf::Vector2f(545.f, 20.f));
+    picietÈÄô.setSize(Vector2f(100.f, 100.f));
+    picietÈÄô.setFillColor(Color{ 224, 233, 255 });
+    picietÈÄô.setPosition(sf::Vector2f(785.f, 20.f));
     
 
-
+    //wczytanie czcionki
     Font foncik;
     foncik.loadFromFile("fonts/Storytime.ttf");
 
@@ -157,7 +159,8 @@ int main()
     poziom.setStyle(sf::Text::Bold);
     poziom.setCharacterSize(200);
     poziom.setPosition(sf::Vector2f(1025.f, 520.f));
-
+    
+    //mechanizm liczenia czasu
     Clock clock;
     Clock mleko;
     Clock spanko;
@@ -170,6 +173,7 @@ int main()
         timer+=time;
         Event e;
         while (window.pollEvent(e))
+            //wczytywanie dzia≈Ça≈Ñ na klawiaturze
         {
             if (e.type == Event::Closed)
                 window.close();
@@ -188,9 +192,7 @@ int main()
                 else if (e.key.code == Keyboard::Escape) window.close();
             }
         }
-
-    /*if (Keyboard::isKeyPressed(Keyboard::Down)) delay=0.05f;
-    if (e.key.code == Mouse::Left) keyM = 1; */
+    
     if (e.key.code == Keyboard::Num1) keyNumber = 1;
     else if (e.key.code == Keyboard::Num2) keyNumber = 2;
     else if (e.key.code == Keyboard::Num3) keyNumber = 3;
@@ -200,50 +202,49 @@ int main()
     else if (e.key.code == Keyboard::Num7) keyNumber = 7;
     else if (e.key.code == Keyboard::Num8) keyNumber = 8;
     else if (e.key.code == Keyboard::Num9) keyNumber = 9;
-
-    zape≥nienieMleka = mleko.getElapsedTime().asSeconds() / 5;
-    if (zape≥nienieMleka >= 1) { zape≥nienieMleka = 1; };
-    mlekot≥o.setSize(Vector2f(100.f, zape≥nienieMleka*100));
-    mlekot≥o.setPosition(sf::Vector2f(425.f, 20.f+ 100 - zape≥nienieMleka * 100));
+    
+    //obliczenia dotyczƒÖce czasu w grze i jego efekt√≥w
+    zapeËªüienieMleka = mleko.getElapsedTime().asSeconds() / 5;
+    if (zapeËªüienieMleka >= 1) { zapeËªüienieMleka = 1; };
+    mlekotÈÄô.setSize(Vector2f(100.f, zapeËªüienieMleka*100));
+    mlekotÈÄô.setPosition(sf::Vector2f(425.f, 20.f+ 100 - zapeËªüienieMleka * 100));
     if (mleko.getElapsedTime().asSeconds() >= 5) { 
-        if (keyM == 1 && zape≥nienieSpanka>0.7f && zape≥nienieJedzenia>0.7f && zape≥nieniePicia>0.7f) { 
-        std::cout << "Odebra≥eú Mleko" << std::endl; money += 50*mnoønik2; mleko.restart(); zape≥nieniePicia = zape≥nieniePicia - 0.025f; } }
+        if (keyM == 1 && zapeËªüienieSpanka>0.7f && zapeËªüienieJedzenia>0.7f && zapeËªüieniePicia>0.7f) { 
+        //std::cout << "OdebraË≤´ÔøΩ Mleko" << std::endl;
+            money += 50*mnoÁ©çik2; mleko.restart(); zapeËªüieniePicia = zapeËªüieniePicia - 0.025f; } }
 
-    zape≥nienieSpanka = zape≥nienieSpanka - (spanko.getElapsedTime().asSeconds())/(100*(1/mnoønik1));
+    zapeËªüienieSpanka = zapeËªüienieSpanka - (spanko.getElapsedTime().asSeconds())/(100*(1/mnoÁ©çik1));
     spanko.restart();
-    if (zape≥nienieSpanka>= 1) { zape≥nienieSpanka = 1; };
-    if (zape≥nienieSpanka <= 0) { zape≥nienieSpanka = 0; };
-    spankot≥o.setSize(Vector2f(100.f,zape≥nienieSpanka*100));
-    spankot≥o.setPosition(sf::Vector2f(665.f, 20.f + 100.f - zape≥nienieSpanka * 100));
+    if (zapeËªüienieSpanka>= 1) { zapeËªüienieSpanka = 1; };
+    if (zapeËªüienieSpanka <= 0) { zapeËªüienieSpanka = 0; };
+    spankotÈÄô.setSize(Vector2f(100.f,zapeËªüienieSpanka*100));
+    spankotÈÄô.setPosition(sf::Vector2f(665.f, 20.f + 100.f - zapeËªüienieSpanka * 100));
 
-    zape≥nienieJedzenia = zape≥nienieJedzenia - (jedzenie.getElapsedTime().asSeconds()) / (100 * (1 / mnoønik1));
+    zapeËªüienieJedzenia = zapeËªüienieJedzenia - (jedzenie.getElapsedTime().asSeconds()) / (100 * (1 / mnoÁ©çik1));
     jedzenie.restart();
-    if (zape≥nienieJedzenia >= 1) { zape≥nienieJedzenia = 1; };
-    if (zape≥nienieJedzenia <= 0) { zape≥nienieJedzenia = 0; };
-    jedzeniet≥o.setSize(Vector2f(100.f, zape≥nienieJedzenia * 100));
-    jedzeniet≥o.setPosition(sf::Vector2f(545.f, 20.f + 100.f - zape≥nienieJedzenia * 100));
+    if (zapeËªüienieJedzenia >= 1) { zapeËªüienieJedzenia = 1; };
+    if (zapeËªüienieJedzenia <= 0) { zapeËªüienieJedzenia = 0; };
+    jedzenietÈÄô.setSize(Vector2f(100.f, zapeËªüienieJedzenia * 100));
+    jedzenietÈÄô.setPosition(sf::Vector2f(545.f, 20.f + 100.f - zapeËªüienieJedzenia * 100));
 
-    zape≥nieniePicia = zape≥nieniePicia - (picie.getElapsedTime().asSeconds()) / (200 * (1 / mnoønik1));
+    zapeËªüieniePicia = zapeËªüieniePicia - (picie.getElapsedTime().asSeconds()) / (200 * (1 / mnoÁ©çik1));
     picie.restart();
-    if (zape≥nieniePicia >= 1) { zape≥nieniePicia = 1; };
-    if (zape≥nieniePicia <= 0) { zape≥nieniePicia = 0; };
-    piciet≥o.setSize(Vector2f(100.f, zape≥nieniePicia * 100));
-    piciet≥o.setPosition(sf::Vector2f(785.f, 20.f + 100.f - zape≥nieniePicia * 100));
-    if (keySpace == 1) { wysokoúÊBucketa = wysokoúÊBucketa + 20; }
+    if (zapeËªüieniePicia >= 1) { zapeËªüieniePicia = 1; };
+    if (zapeËªüieniePicia <= 0) { zapeËªüieniePicia = 0; };
+    picietÈÄô.setSize(Vector2f(100.f, zapeËªüieniePicia * 100));
+    picietÈÄô.setPosition(sf::Vector2f(785.f, 20.f + 100.f - zapeËªüieniePicia * 100));
+    if (keySpace == 1) { wysokoÓ∞´Bucketa = wysokoÓ∞´Bucketa + 20; }
     keySpace = 0;
-    wysokoúÊBucketa = wysokoúÊBucketa - clock.getElapsedTime().asMilliseconds()*15;
+    wysokoÓ∞´Bucketa = wysokoÓ∞´Bucketa - clock.getElapsedTime().asMilliseconds()*15;
     clock.restart();
-    if (wysokoúÊBucketa < 0) { wysokoúÊBucketa = 0; }
-    //std::cout << zape≥nienieMleka << std::endl;
-    //std::cout << Mouse::getPosition(window).x << "   "<< Mouse::getPosition(window).y << std::endl;
+    if (wysokoÓ∞´Bucketa < 0) { wysokoÓ∞´Bucketa = 0; }
+
 
     if (keyS == 1){
         graSpanko = 1;
         std::mt19937 generator(std::time(nullptr));
         std::uniform_int_distribution<int> liczbaCou(1, 9);
-     //   std::mt19937 generator(std::time(nullptr));
         std::uniform_int_distribution<int> pozycjaX(0, 1200);
-     //   std::mt19937 generator(std::time(nullptr));
         std::uniform_int_distribution<int> pozycjaY(300,620);
         spankoLiczbaCou = liczbaCou(generator);
         for (int i{}; i < 9; i++) {
@@ -251,7 +252,7 @@ int main()
             tabSpankoY[i] = pozycjaY(generator);
         }
     }
-
+    //w≈ÇƒÖczanie minigier
     if (keyP == 1) {
         graPicie = 1;
     }
@@ -274,7 +275,6 @@ int main()
     keyP = 0;
     text.setString(std::to_string(money));
     poziom.setString(std::to_string(level));
-    /////////draw//////////
     window.clear(Color::White);
     window.draw(background);
     window.draw(cou);
@@ -287,12 +287,11 @@ int main()
         }
         if (keyNumber == spankoLiczbaCou) {
             graSpanko = 0;
-            zape≥nienieSpanka = 100.f;
+            zapeËªüienieSpanka = 100.f;
             keyNumber = 0;
         }
         else if (keyNumber != 0) {
             graSpanko = 0;
-            //zape≥nienieSpanka = zape≥nienieSpanka - 0.05;
             keyNumber = 0;
         }
     }
@@ -300,13 +299,13 @@ int main()
 
     if (graPicie == 1) {
         window.draw(backgroundPicie);
-        waterbucket.setPosition(927.f, 700.f - wysokoúÊBucketa);
+        waterbucket.setPosition(927.f, 700.f - wysokoÓ∞´Bucketa);
         window.draw(waterbucket);
-        if (wysokoúÊBucketa >= 450) {
+        if (wysokoÓ∞´Bucketa >= 450) {
             graPicie = 0;
-            zape≥nieniePicia = 100.f;
+            zapeËªüieniePicia = 100.f;
             keySpace = 0;
-            wysokoúÊBucketa = 0;
+            wysokoÓ∞´Bucketa = 0;
         }
     }
     if (graJedzenie == 1) {
@@ -331,65 +330,68 @@ int main()
         window.draw(apple);
         if (pozycjaCouX > pozycjaAppleX - 60 && pozycjaCouX < pozycjaAppleX + 60 && pozycjaCouY < pozycjaAppleY + 100 && pozycjaCouY > pozycjaAppleY - 100 ) {
             graJedzenie = 0;
-            zape≥nienieJedzenia = 100.f;
+            zapeËªüienieJedzenia = 100.f;
         }
     }
+    //system zdobywania poziom√≥w 
     if (level == 1 && money >= 1000) {
         level = 2;
         money = money - 1000;
-        mnoønik1 = 1.5f;
-        mnoønik2 = 3.f;
+        mnoÁ©çik1 = 1.5f;
+        mnoÁ©çik2 = 3.f;
         t1.loadFromFile("images/cou2.png");
     }
     else if (level == 2 && money >= 10000) {
         level = 3;
         money = money - 10000;
-        mnoønik1 = 2.1f;
-        mnoønik2 = 9.f;
+        mnoÁ©çik1 = 2.1f;
+        mnoÁ©çik2 = 9.f;
         t1.loadFromFile("images/cou3.png");
     }
     else if (level == 3 && money >= 100000) {
         level = 4;
         money = money - 100000;
-        mnoønik1 = 3.f;
-        mnoønik2 = 81.f;
+        mnoÁ©çik1 = 3.f;
+        mnoÁ©çik2 = 81.f;
         t1.loadFromFile("images/cou4.png");
     }
     else if (level >= 4 && money >= 1000000) {
         level++;
         money = money - 1000000;
-        mnoønik1 = mnoønik1*1.03f;
-        if (mnoønik1 > 4.3) { mnoønik1 = 5; }
-        mnoønik2 = mnoønik2;
+        mnoÁ©çik1 = mnoÁ©çik1*1.03f;
+        if (mnoÁ©çik1 > 4.3) { mnoÁ©çik1 = 5; }
+        mnoÁ©çik2 = mnoÁ©çik2;
     }
     if (money < 0) { money = 0; }
 
     keySpace = 0;
     dx = 0;
     dy = 0;
+    //wy≈õwietlanie element√≥w okna gry
     window.draw(tophud);
     window.draw(coin);
     window.draw(text);
     window.draw(poziom);
-    window.draw(mlekot≥o);
-    window.draw(spankot≥o);
-    window.draw(jedzeniet≥o);
-    window.draw(piciet≥o);
+    window.draw(mlekotÈÄô);
+    window.draw(spankotÈÄô);
+    window.draw(jedzenietÈÄô);
+    window.draw(picietÈÄô);
     window.draw(ikonamleko);
     window.draw(ikonajedzenie);
     window.draw(ikonaspanko);
     window.draw(ikonapicie);
     window.display();
     }
+    //zapis stanu gry
     plik.open("save/save.txt", std::ios::out);
     if (plik.good())
     {
         plik << money << std::endl;
         plik << level << std::endl;
-        plik << zape≥nienieMleka << std::endl;
-        plik << zape≥nienieSpanka << std::endl;
-        plik << zape≥nienieJedzenia << std::endl;
-        plik << zape≥nieniePicia << std::endl;
+        plik << zapeËªüienieMleka << std::endl;
+        plik << zapeËªüienieSpanka << std::endl;
+        plik << zapeËªüienieJedzenia << std::endl;
+        plik << zapeËªüieniePicia << std::endl;
 
     }
     else std::cout << "Nie wczytano save'a" << std::endl;
